@@ -1,0 +1,37 @@
+lab .sumof
+    adr result &0
+    adr i      &1
+    adr mx     &2
+    
+    pop mx
+    
+    set result 0
+    set i      0
+    
+    inc result *i
+    inc i 1
+    grt *i *mx 2
+    jmp -3
+    
+    psh *result
+    ret
+
+lab .catch
+    prl "Runtime Error !"
+
+lab .main
+    adr a &0
+    
+    prl "Sum Of Given Number Calculator"
+    prl "Input A Integer : "
+    
+    inp a
+    try 1 catch
+    int a *a
+    
+    psh *a
+    cal sumof
+    pop a
+    prl *a
+    
+    ret

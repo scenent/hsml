@@ -1,0 +1,65 @@
+lab .fibonacci
+    adr a &0
+    adr b &1
+    adr c &2
+    adr n &3
+    adr i &4
+    adr zero &5
+    adr one &6
+    adr two &7
+    
+    set a 0
+    set b 1
+    set i 2
+    set zero 0
+    set one 1
+    set two 2
+    
+    pop n
+    
+    eql *n *zero 4
+    eql *n *one 3
+    eql *n *two 4
+    jmp 5
+    psh *n
+    ret
+    psh 1
+    ret
+    
+    add c *a *b
+    set a *b
+    set b *c
+    grt *i *n 3
+    inc i 1
+    jmp -5
+    
+    psh *b
+    ret
+    
+lab .catch
+    prl "Runtime Error !"
+
+lab .main
+    adr i &0
+    adr n &1
+    adr v &2
+    
+    set i 0
+    
+    prl "Fibonacci Number Calculator"
+    prl "Input Positive Integer : "
+    
+    inp n
+    try 1 catch
+    int n *n
+    
+    psh *i
+    cal fibonacci
+    pop v
+    prl *v
+    inc i 1
+    grt *i *n 2
+    jmp -6
+    
+    ret
+    

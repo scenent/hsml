@@ -1,0 +1,55 @@
+lab .swap
+    adr temp &0
+    adr a &1
+    adr b &2
+    
+    pop b
+    pop a
+    
+    set temp *a
+    set a *b
+    set b *temp
+    
+    psh *a
+    psh *b
+    
+    ret
+
+lab .catch
+    prl "Runtime Error !"
+
+lab .main
+    adr a &0
+    adr b &1
+    
+    prl "Two Numbers Swapper"
+    prl "Input Number 1: "
+    
+    inp a
+    try 1 catch
+    int a *a
+    
+    prl "Input Number 2 : "
+    
+    inp b
+    try 1 catch
+    int b *b
+    
+    prt *a
+    prt "    "
+    prt *b
+    prt "\n"
+    
+    psh *b
+    psh *a
+    cal swap
+    pop a
+    pop b
+    
+    prt *a
+    prt "    "
+    prt *b
+    prt "\n"
+    
+    ret
+    

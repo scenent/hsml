@@ -1,0 +1,71 @@
+lab .normalizevec
+    adr x &0
+    adr y &1
+    adr len &2
+    adr two &3
+    adr half &4
+    adr zero &5
+    adr X &6
+    adr Y &7
+    set two 2
+    set half 0.5
+    set zero 0
+    
+    pop x
+    pop y
+    eql *x *zero 2
+    jmp 6
+    eql *y *zero 2
+    jmp 4
+    psh 0
+    psh 0
+    ret
+    set X *x
+    set Y *y
+    
+    pow x *x *two
+    pow y *y *two
+    
+    add x *x *y
+    
+    pow len *x *half
+    
+    div X *X *len
+    div Y *Y *len
+    
+    psh *X
+    psh *Y
+    ret
+
+lab .catch
+    prl "Runtime Error !"
+
+lab .main
+    adr x &0
+    adr y &0
+    
+    prl "Get Length Of Vector2"
+    prl "Input X value : "
+    
+    inp x
+    try 1 catch
+    int x *x
+    
+    prl "Input Y value : "
+    
+    inp y
+    try 1 catch
+    int y *y
+    
+    psh *y
+    psh *x
+    cal normalizevec
+    pop x
+    pop y
+    
+    prl "Normalized Vector : "
+    prt *x
+    prt "    "
+    prt *y
+    
+    ret

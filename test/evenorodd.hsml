@@ -1,0 +1,40 @@
+lab .evenorodd
+    adr a &0
+    adr zero &1
+    
+    set zero 0
+    
+    pop a
+    
+    mod a *a 2
+    
+    eql *a *zero 3
+    psh "Odd"
+    ret
+    psh "Even"
+    ret
+
+lab .catch
+    prl "Runtime Error !"
+
+lab .main
+    adr a &0
+    
+    prl "Even Or Odd Identifier"
+    prl "Input A Integer : "
+    
+    inp a
+    try 1 catch
+    int a *a
+    
+    prt *a
+    prt " Is "
+    
+    psh *a
+    cal evenorodd
+    pop a
+    
+    prt *a
+    
+    ret
+    
