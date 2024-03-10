@@ -42,7 +42,7 @@ lab .catch
 
 lab .main
     adr x &0
-    adr y &0
+    adr y &1
     
     prl "Get Length Of Vector2"
     prl "Input X value : "
